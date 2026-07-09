@@ -43,10 +43,8 @@ const injectStyles = () => {
       --card-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.7);
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
