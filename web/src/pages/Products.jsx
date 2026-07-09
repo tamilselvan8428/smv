@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { RotatingPeanutsLoader } from './Home';
 
 /* ─── Premium 3D Tilt Card Component ─── */
 const TiltCard = ({ product, index, isDemo }) => {
+  const navigate = useNavigate();
   const cardRef = useRef(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const [imgError, setImgError] = useState(false);
@@ -77,13 +79,23 @@ const TiltCard = ({ product, index, isDemo }) => {
       </h3>
 
       {/* Product Price */}
+      {/* Product Price & Enquiry */}
       <div
-        className="mt-auto pb-1"
+        className="mt-auto pb-1 flex items-center justify-between gap-4"
         style={{ transform: 'translateZ(25px)' }}
       >
         <span className="text-2xl font-black text-amber-600 dark:text-amber-400">
           ₹{product.price}
         </span>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            navigate(`/contact?product=${encodeURIComponent(product.name)}`);
+          }}
+          className="px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-amber-500 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-white shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
+        >
+          Enquire
+        </button>
       </div>
     </motion.div>
   );

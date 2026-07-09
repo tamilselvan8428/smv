@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 /* ─── Style Injection ─── */
 const injectStyles = () => {
@@ -206,6 +207,9 @@ function FAQ() {
 
 /* ══════════════════════ MAIN ══════════════════════ */
 const Contact = () => {
+  const [searchParams] = useSearchParams();
+  const prepopulatedProduct = searchParams.get('product') || '';
+
   const [form, setForm]       = useState({ name:'', email:'', phone:'', subject:'', message:'' });
   const [errors, setErrors]   = useState({});
   const [touched, setTouched] = useState({});
@@ -217,6 +221,16 @@ const Contact = () => {
   const infoRef  = useReveal(0.08);
 
   useEffect(() => { injectStyles(); }, []);
+
+  useEffect(() => {
+    if (prepopulatedProduct) {
+      setForm(prev => ({
+        ...prev,
+        subject: 'wholesale',
+        message: `Hello SMV team,\n\nI would like to enquire about wholesale pricing and availability for "${prepopulatedProduct}". Please provide details on minimum order quantities and shipping.\n\nThank you!`
+      }));
+    }
+  }, [prepopulatedProduct]);
 
   /* ── Validation ── */
   const validate = (data) => {
