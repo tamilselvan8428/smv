@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-amber-400: var(--saffron-light); /* Shimmering Gold */
+  --color-amber-500: var(--saffron);       /* Saffron Orange */
+  --color-amber-600: var(--saffron-dark);  /* Saffron Dark */
+  --color-amber-700: var(--saffron-dark);
+}
+
+::selection {
+  background-color: rgba(217, 119, 6, 0.2);
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--saffron-dark);
+  border-radius: 5px;
+  border: 2.5px solid var(--bg-main);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--saffron);
+}
